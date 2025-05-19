@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Ucapan Ulang Tahun</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comic Sans MS', cursive;
+    }
+
+    body {
+      overflow: hidden;
+      background: url('https://png.pngtree.com/background/20210715/original/pngtree-birthday-cake-balloon-background-picture-image_1324290.jpg') no-repeat center center/cover;
+      color: #fff;
+      text-align: center;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+      padding: 20px;
+    }
+
+    .slide.active {
+      opacity: 1;
+      z-index: 10;
+    }
+
+    h1, h2, p {
+      margin: 15px;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    .button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 18px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 2px 2px 8px #000;
+    }
+
+    .butterfly {
+      position: absolute;
+      width: 80px;
+      animation: flutter 10s infinite ease-in-out;
+    }
+
+    @keyframes flutter {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(100px, -100px) rotate(20deg); }
+      50% { transform: translate(-50px, 50px) rotate(-20deg); }
+      75% { transform: translate(150px, 0px) rotate(10deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    .cake {
+      width: 200px;
+      margin-top: 30px;
+    }
+
+    .candle {
+      position: relative;
+      width: 10px;
+      height: 40px;
+      background: #fff;
+      margin: 0 auto;
+      margin-top: -30px;
+    }
+
+    .flame {
+      position: absolute;
+      top: -15px;
+      left: -5px;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(ellipse at center, #ff0 0%, #f90 60%, rgba(255, 0, 0, 0) 70%);
+      border-radius: 50%;
+      animation: flicker 0.2s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1) translateY(0); opacity: 1; }
+      100% { transform: scale(1.1) translateY(-2px); opacity: 0.8; }
+    }
+
+    video {
+      margin-top: 30px;
+      max-width: 90%;
+      border: 5px solid white;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Musik Latar -->
+  <audio id="bgm" autoplay loop>
+    <source src="musik.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio HTML5.
+  </audio>
+
+  <!-- Halaman 1 -->
+  <div class="slide active" id="slide1">
+    <h1>Halo!</h1>
+    <h2>Selamat Ulang Tahun</h2>
+    <h2>Untuk Kamu,</h2>
+    <h1><b>[Nama yang Ulang Tahun]</b></h1>
+    <button class="button" onclick="nextSlide()">Lanjut</button>
+  </div>
+
+  <!-- Halaman 2 -->
+  <div class="slide" id="slide2">
+    <h2>Dari: [Nama Pengirim]</h2>
+    <p>Semoga kamu selalu diberkati kesehatan, cinta, dan kebahagiaan.</p>
+    <p>Doa terbaik selalu untukmu 🎉</p>
+    <button class="button" onclick="nextSlide()">Lanjut</button>
+  </div>
+
+  <!-- Halaman 3 -->
+  <div class="slide" id="slide3">
+    <h2>Pesan & Kesan</h2>
+    <p>Kenapa sih kamu terus menolak aku?</p>
+    <p>Aku cuma ingin melihat kamu bahagia... 😢</p>
+    <button class="button" onclick="nextSlide()">Lanjut</button>
+  </div>
+
+  <!-- Halaman 4 -->
+  <div class="slide" id="slide4">
+    <h2>Selamat Ulang Tahun Lagi!</h2>
+    <img class="cake" src="https://i.imgur.com/PMQkO6M.png" alt="Kue Ulang Tahun">
+    <div class="candle">
+      <div class="flame"></div>
+    </div>
+    <p>Semoga hari ini penuh kebahagiaan seperti lilin yang menyala hangat.</p>
+
+    <!-- Video di halaman terakhir -->
+    <video controls autoplay muted loop>
+      <source src="video.mp4" type="video/mp4">
+      Browser tidak mendukung video.
+    </video>
+  </div>
+
+  <!-- Kupu-Kupu -->
+  <img src="https://i.imgur.com/UwR7e9U.png" class="butterfly" style="top:10%; left:10%;">
+  <img src="https://i.imgur.com/UwR7e9U.png" class="butterfly" style="top:20%; left:80%;">
+  <img src="https://i.imgur.com/UwR7e9U.png" class="butterfly" style="top:70%; left:30%;">
+
+  <script>
+    let current = 1;
+    const slides = document.querySelectorAll('.slide');
+
+    function nextSlide() {
+      if (current < slides.length) {
+        slides[current - 1].classList.remove('active');
+        slides[current].classList.add('active');
+        current++;
+      }
+    }
+
+    // Play musik saat interaksi pertama
+    const audio = document.getElementById('bgm');
+    window.addEventListener('click', () => {
+      audio.play();
+    }, { once: true });
+  </script>
+
+</body>
+</html>
